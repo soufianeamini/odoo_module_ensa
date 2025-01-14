@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+	<!-- Records -->
+	<record id="part_model_action" model="ir.actions.act_window">
+		<field name="name">Part action</field>
+		<field name="res_model">part_model</field>
+		<field name="view_mode">list,form</field>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+				Create Part
+			</p>
+			<p>
+				Manage your parts here
+			</p>
+		</field>
+	</record>
+
+	<!-- Menu items -->
+	<menuitem id="parts_menu" name="Parts" sequence="10"/>
+	<menuitem id="parts_menu_items" name="Items"
+		parent="parts_menu" action="part_model_action"/>
+</odoo>

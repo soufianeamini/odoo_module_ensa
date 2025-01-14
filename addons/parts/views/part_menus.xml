@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<odoo>
-	<menuitem id="parts_menu" name="Parts" sequence="10"/>
-	<menuitem id="parts_menu_items" name="Items"
-		parent="parts_menu" action="part_model_action"/>
-</odoo>
