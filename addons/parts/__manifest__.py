@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Parts',
+    'name': 'Gestion Commandes',
     'version': '1.2',
     'description': "",
     'author': 'Soufiane Amini / Abdelmoghit Merzouki Idrissi',
