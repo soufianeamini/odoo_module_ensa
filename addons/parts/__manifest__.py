@@ -4,6 +4,7 @@
     'name': 'Parts',
     'version': '1.2',
     'description': "",
+    'author': 'Soufiane Amini / Abdelmoghit Merzouki Idrissi',
     'depends': [
         'base',
         'web'
