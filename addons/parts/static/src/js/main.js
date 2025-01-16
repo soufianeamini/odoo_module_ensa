@@ -26,20 +26,26 @@ class PartsInterface {
    * @type {HTMLSelectElement}
    */
   imageInput
+  /**
+   * @type {HTMLDivElement}
+   */
+  img
 
   constructor() {
     this.inputSetups.set("image_0", (/** @type HTMLElement */ imageInput) => {
       if (imageInput instanceof HTMLSelectElement) {
         console.log(`imageInput found`)
-        const img = document.createElement("div")
-        // img.innerHTML = images.get("chassis")(color)
-        // img.style.filter = "opacity(0.5) drop-shadow(0 0 0 blue) sepia(1) saturate(5);"
-        imageInput.parentElement?.append(img)
+        this.img = document.createElement("div")
+        imageInput.parentElement?.append(this.img)
         imageInput.addEventListener("change", (e) => {
           if (e.target instanceof HTMLSelectElement) {
             // @ts-ignore
-            this.selectedType = e.target.value
-            this.changePartType()
+            this.selectedType = e.target.value.slice(
+              1,
+              e.target.value.length - 1,
+            )
+            console.log(this.selectedType)
+            this.changePartImage()
           }
         })
         this.imageInput = imageInput
@@ -51,6 +57,12 @@ class PartsInterface {
         console.log(`color Input found: ${colorInput}`)
         colorInput.type = "color"
         this.colorInput = colorInput
+        colorInput.addEventListener("change", (e) => {
+          if (e.target instanceof HTMLInputElement) {
+            this.selectedColor = e.target.value
+            this.changePartImage()
+          }
+        })
       }
     })
     document.addEventListener("DOMContentLoaded", this.waitForInputs.bind(this))
@@ -59,7 +71,12 @@ class PartsInterface {
   /**
    * @private
    */
-  changePartType() {}
+  changePartImage() {
+    const image = images.get(this.selectedType)
+    if (image) {
+      this.img.innerHTML = image(this.selectedColor)
+    }
+  }
 
   /**
    * @private
