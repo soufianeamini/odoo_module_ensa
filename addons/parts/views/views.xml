@@ -12,11 +12,62 @@
 			<p>
 				Manage your parts here
 			</p>
+			<div t-component="ColorPicker" />
+		</field>
+	</record>
+
+	<record id="part_model_tree" model="ir.ui.view">
+		<field name="name">part_model.tree</field>
+		<field name="model">part_model</field>
+		<field name="arch" type="xml">
+			<tree string="Channel">
+				<field name="name" />
+				<field name="color" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="part_model_view_form" model="ir.ui.view">
+		<field name="name">part_model.form</field>
+		<field name="model">part_model</field>
+		<field name="arch" type="xml">
+			<form string="Part">
+				<sheet>
+					<div class="oe_title">
+						<div class="oe_edit_only">
+							<label for="name" />
+						</div>
+						<h3 class="mb16">
+							<field name="name" class="mb16" />
+						</h3>
+						<group>
+							<div class="oe_edit_only">
+								<label for="r" />
+							</div>
+							<h3 class="mb16">
+								<field name="r" class="mb16" />
+							</h3>
+							<div class="oe_edit_only">
+								<label for="g" />
+							</div>
+							<h3 class="mb16">
+								<field name="g" class="mb16" />
+							</h3>
+							<div class="oe_edit_only">
+								<label for="b" />
+							</div>
+							<h3 class="mb16">
+								<field name="b" class="mb16" />
+							</h3>
+						</group>
+					</div>
+				</sheet>
+			</form>
 		</field>
 	</record>
 
 	<!-- Menu items -->
-	<menuitem id="parts_menu" name="Parts" sequence="10"/>
+	<menuitem id="parts_menu" name="Parts" sequence="10" />
 	<menuitem id="parts_menu_items" name="Items"
-		parent="parts_menu" action="part_model_action"/>
+		parent="parts_menu" action="part_model_action" />
 </odoo>
