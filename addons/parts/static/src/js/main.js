@@ -8,7 +8,7 @@ odoo.define("parts.main", [], /** @param _req {unknown} */ (_req) => {
 			if (colorInput &&  colorInput instanceof HTMLInputElement) {
 				console.log(`color Input found: ${colorInput}`)
 				observerInstance.disconnect()
-				colorInput.value = "Setting color dynamically in javascript"
+				colorInput.type = "color"
 			}
 		})
 
