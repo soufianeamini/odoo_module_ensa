@@ -6,4 +6,9 @@ class PartModel(models.Model):
 
     name = fields.Char(required=True)
     color = fields.Char(required=True, help="Couleur appliquee sur la piece")
-    image = fields.Selection([("hood", "Hood"), ("wheel", "Wheel")])
+    image = fields.Selection([
+        ("hood", "Hood"),
+        ("wheel", "Wheel"),
+        ("spoiler", "Spoiler"),
+        ("chassis", "Chassis")
+    ])
