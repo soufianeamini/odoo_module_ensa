@@ -9,6 +9,11 @@
         'base',
         'web'
     ],
+    'assets': {
+        'web.assets_backend': [
+            'parts/static/src/js/main.js',
+        ],
+    },
     'installable': True,
     'application': True,
     'auto_install': False,
