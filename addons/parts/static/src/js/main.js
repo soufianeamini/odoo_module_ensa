@@ -5,50 +5,35 @@ odoo.define(
   [],
   /** @param _req {unknown} */ (_req) => {
     console.log("JavaScript initialized!")
-    /** @type Map<string, (arg1: HTMLElement, arg2: MutationObserver) => void>*/
+    /** @type Map<string, (arg1: HTMLElement) => void>*/
     let inputSetups = new Map()
 
-    inputSetups.set(
-      "image_0",
-      (
-        /** @type HTMLElement */ imageInput,
-        /** @type MutationObserver */ observerInstance,
-      ) => {
-        console.log(`imageInput found`)
-        imageInput.addEventListener("change", (e) => {
-          console.log("imageinput value changed")
-          console.log(e.target)
-        })
-        decrementButtonCount(observerInstance)
-      },
-    )
+    inputSetups.set("image_0", (/** @type HTMLElement */ imageInput) => {
+      console.log(`imageInput found`)
+      imageInput.addEventListener("change", (e) => {
+        console.log("imageinput value changed")
+        console.log(e.target)
+      })
+    })
 
-    inputSetups.set(
-      "color_0",
-      (
-        /** @type HTMLElement */ colorInput,
-        /** @type MutationObserver */ observerInstance,
-      ) => {
-        console.log(`color Input found: ${colorInput}`)
-        if (colorInput instanceof HTMLInputElement) {
-          colorInput.type = "color"
-          decrementButtonCount(observerInstance)
-        }
-      },
-    )
+    inputSetups.set("color_0", (/** @type HTMLElement */ colorInput) => {
+      console.log(`color Input found: ${colorInput}`)
+      if (colorInput instanceof HTMLInputElement) {
+        colorInput.type = "color"
+      }
+    })
 
-    function decrementButtonCount(
+    function disconnectObserver(
       /** @type MutationObserver */ observerInstance,
     ) {
-      console.log({ inputSetupSize: inputSetups.size })
       if (inputSetups.size === 0) {
         observerInstance.disconnect()
         console.log("disconnected observer")
       }
     }
 
-    function waitForColorInput() {
-      const colorInputObserver = new MutationObserver((_, observerInstance) => {
+    function waitForInputs() {
+      const observer = new MutationObserver((_, observerInstance) => {
         ;[...inputSetups.keys()].forEach((id) => {
           console.log(`observing id: ${id}`)
           const input = document.getElementById(id)
@@ -59,18 +44,19 @@ odoo.define(
               input instanceof HTMLInputElement) &&
             func
           ) {
+            func(input)
             inputSetups.delete(id)
-            func(input, observerInstance)
+            disconnectObserver(observerInstance)
           }
         })
       })
 
-      colorInputObserver.observe(document.body, {
+      observer.observe(document.body, {
         childList: true,
         subtree: true,
       })
     }
 
-    document.addEventListener("DOMContentLoaded", waitForColorInput)
+    document.addEventListener("DOMContentLoaded", waitForInputs)
   },
 )
