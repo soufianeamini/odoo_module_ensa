@@ -3,7 +3,7 @@
 {
     'name': 'Parts',
     'version': '1.2',
-    'description': "",
+    'description': "Ce module permet la creation de nouvelles pieces avec differentes options",
     'author': 'Soufiane Amini / Abdelmoghit Merzouki Idrissi',
     'depends': [
         'base',
